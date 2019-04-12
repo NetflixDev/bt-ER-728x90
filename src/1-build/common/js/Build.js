@@ -8,10 +8,9 @@ import { Animation } from '@common/js/Animation.js'
 import { Control } from '@common/js/Control.js'
 import '@netflixadseng/wc-netflix-flushed-ribbon'
 import '@netflixadseng/wc-netflix-video'
+import CanvasIris from '@common/js/CanvasIris.js'
 import { UIComponent, UIBorder, UIButton, UIImage, TextFormat, UITextField, UISvg } from 'ad-ui'
 import { ObjectUtils } from 'ad-utils'
-import CanvasIris from '@common/js/CanvasIris.js'
-import postMarkup from '@common/js/postMarkup.js'
 
 export function Main() {
 	var T = Markup.get('main')
@@ -26,6 +25,20 @@ export function Main() {
 		userSelect: 'none'
 	})
 	Styles.setCss(T, { backgroundColor: '#000000' })
+
+	return T
+}
+
+// ==============================================================================================================
+export function Intro(arg) {
+	const base = {
+		id: 'intro-container',
+		css: {
+			width: 'inherit',
+			height: 'inherit'
+		}
+	}
+	const T = new UIComponent(ObjectUtils.defaults(arg, base, true))
 
 	return T
 }
@@ -87,9 +100,10 @@ export function EndFrame(arg) {
 	T.cta.setAttribute('data-dynamic-key', 'CTA')
 	T.cta.setAttribute('arrow', '')
 	T.cta.setAttribute('border', '')
-	T.cta.setAttribute('width', 116)
+	T.cta.setAttribute('width', 107)
 	T.cta.setAttribute('max-width', 130)
 	T.cta.setAttribute('height', 30)
+	T.cta.setAttribute('stretch-origin', 'right')
 	T.appendChild(T.cta)
 
 	// ratings bug
@@ -107,7 +121,131 @@ export function EndFrame(arg) {
 			irisColor: Creative.irisColor
 		})
 
-	T.postMarkupStyling = postMarkup
+	T.postMarkupStyling = function rightCorner() {
+		let T = View.endFrame
+
+		// title treatment
+		Align.set(T.tt, {
+			x: Align.CENTER,
+			y: Align.CENTER
+		})
+
+		Align.set(T.pedigree, {
+			x: {
+				type: Align.CENTER,
+				against: T.tt
+			},
+			y: {
+				type: Align.CENTER,
+				against: 65
+			}
+		})
+
+		// cta
+		var logoCtaY = adData.hasFTM || adData.hasTuneIn ? 45 : 32
+		T.cta.resize()
+		Align.set(T.cta, {
+			x: {
+				type: Align.RIGHT,
+				offset: -20
+			},
+			y: {
+				type: Align.TOP,
+				offset: logoCtaY
+			}
+		})
+
+		// logo
+		Align.set(T.netflixLogo, {
+			x: {
+				type: Align.LEFT,
+				outer: true,
+				against: T.cta,
+				offset: -14
+			},
+			y: {
+				type: Align.TOP,
+				offset: logoCtaY
+			}
+		})
+
+		function getRectAroundElems(elems) {
+			const rects = elems
+				.map(el => el.getBoundingClientRect())
+				// filter out any non-rendered elems
+				// (determined as elem w/o width and height)
+				.filter(rect => rect.width || rect.height)
+			const left = rects.map(rect => rect.left).reduce((mostLeft, val) => Math.min(mostLeft, val))
+			const top = rects.map(rect => rect.top).reduce((mostTop, val) => Math.min(mostTop, val))
+			const right = rects.map(rect => rect.right).reduce((mostRight, val) => Math.max(mostRight, val))
+			const bottom = rects.map(rect => rect.bottom).reduce((mostBottom, val) => Math.max(mostBottom, val))
+			const center = (left + right) / 2
+			return {
+				x: left,
+				y: top,
+				top,
+				left,
+				bottom,
+				right,
+				width: right - left,
+				height: bottom - top,
+				center
+			}
+		}
+		const ctaLogoRect = getRectAroundElems([T.cta, T.netflixLogo])
+
+		if (adData.hasFTM) {
+			// free trial messaging
+			Styles.setCss(T.ftm, {
+				color: '#fff',
+				fontSize: 14,
+				letterSpacing: 1,
+				textAlign: 'center'
+			})
+			Align.set(T.ftm, {
+				x: { type: Align.CENTER, against: ctaLogoRect.center },
+				y: {
+					type: Align.BOTTOM,
+					against: ctaLogoRect.top,
+					offset: -8
+				}
+			})
+			T.removeChild(T.tuneIn)
+		} else {
+			// tune-in
+			Styles.setCss(T.tuneIn, {
+				color: '#fff',
+				fontSize: 16,
+				letterSpacing: 1,
+				textAlign: 'center'
+			})
+			Align.set(T.tuneIn, {
+				x: { type: Align.CENTER, against: ctaLogoRect.center },
+				y: {
+					type: Align.BOTTOM,
+					against: ctaLogoRect.top,
+					offset: -8
+				}
+			})
+			T.removeChild(T.ftm)
+		}
+
+		// ratings bug
+		if (adData.hasRatings) {
+			Align.set(T.ratingsBug, {
+				x: {
+					type: Align.RIGHT,
+					offset: -5
+				},
+				y: {
+					type: Align.BOTTOM,
+					offset: -5
+				}
+			})
+		} else {
+			T.removeChild(T.ratingsBug)
+		}
+	}
 
 	return T
 }
