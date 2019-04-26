@@ -71,7 +71,7 @@ export function EndFrame(arg) {
 		format: TextFormat.INLINE_FIT_CLAMP,
 		alignText: Align.CENTER,
 		spacing: -0.2,
-		text: 'A NETFLIX FILM'
+		text: ''
 	})
 
 	// title treatment
@@ -124,11 +124,22 @@ export function EndFrame(arg) {
 	T.postMarkupStyling = function rightCorner() {
 		let T = View.endFrame
 
-		// title treatment
-		Align.set(T.tt, {
-			x: Align.CENTER,
-			y: Align.CENTER
-		})
+		// title treatment:
+		// no TT url provided
+		// so using default TT for given layout
+		if (!adData.hasTT) {
+			// removing empty netflix-img element before using default TT
+			T.removeChild(T.tt)
+			T.tt = new UIImage({
+				target: T,
+				source: adData.ttSrc,
+				css: {
+					width: adParams.adWidth
+				}
+			})
+		}
+
+		Align.set(T.tt, Align.CENTER)
 
 		Align.set(T.pedigree, {
 			x: {
