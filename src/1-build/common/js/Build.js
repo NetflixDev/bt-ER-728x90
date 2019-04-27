@@ -11,6 +11,8 @@ import '@netflixadseng/wc-netflix-video'
 import CanvasIris from '@common/js/CanvasIris.js'
 import { UIComponent, UIBorder, UIButton, UIImage, TextFormat, UITextField, UISvg } from 'ad-ui'
 import { ObjectUtils } from 'ad-utils'
+import { sideBySideInit, stackedInit } from './EndFrame/inits'
+import { sideBySidePostMarkup, stackedPostMarkup } from './EndFrame/postmarkups'
 
 export function Main() {
 	var T = Markup.get('main')
@@ -54,209 +56,35 @@ export function EndFrame(arg) {
 	}
 	const T = new UIComponent(ObjectUtils.defaults(arg, base, true))
 
-	T.keyart = document.createElement('netflix-img')
-	T.keyart.setAttribute('data-dynamic-key', 'Keyart')
-	T.keyart.setAttribute('width', adParams.adWidth)
-	T.appendChild(T.keyart)
-
-	T.pedigree = new UITextField({
-		target: T,
-		id: 'pedigree',
-		css: {
-			width: 200,
-			height: 50
-		},
-		fontSize: 16,
-		fontFamily: 'Netflix Sans',
-		format: TextFormat.INLINE_FIT_CLAMP,
-		alignText: Align.CENTER,
-		spacing: -0.2,
-		text: ''
-	})
-
-	// title treatment
-	T.tt = document.createElement('netflix-img')
-	T.tt.setAttribute('data-dynamic-key', 'Title_Treatment')
-	T.tt.setAttribute('height', adParams.adHeight)
-	T.appendChild(T.tt)
-
-	// free trial messaging
-	T.ftm = document.createElement('netflix-text')
-	T.ftm.setAttribute('data-dynamic-key', 'FTM')
-	T.appendChild(T.ftm)
-
-	// tune-in
-	T.tuneIn = document.createElement('netflix-text')
-	T.tuneIn.setAttribute('data-dynamic-key', 'Tune_In')
-	T.appendChild(T.tuneIn)
-
-	// logo
-	T.netflixLogo = document.createElement('netflix-brand-logo')
-	T.netflixLogo.setAttribute('width', 112)
-	T.appendChild(T.netflixLogo)
-
-	// cta
-	T.cta = document.createElement('netflix-cta')
-	T.cta.setAttribute('data-dynamic-key', 'CTA')
-	T.cta.setAttribute('arrow', '')
-	T.cta.setAttribute('border', '')
-	T.cta.setAttribute('width', 107)
-	T.cta.setAttribute('max-width', 130)
-	T.cta.setAttribute('height', 30)
-	T.cta.setAttribute('stretch-origin', 'right')
-	T.appendChild(T.cta)
-
-	// ratings bug
-	T.ratingsBug = document.createElement('netflix-img')
-	T.ratingsBug.setAttribute('data-dynamic-key', 'Ratings_Bug_20x20')
-	T.ratingsBug.setAttribute('id', 'ratings_bug')
-	T.ratingsBug.setAttribute('width', 20)
-	T.appendChild(T.ratingsBug)
-
-	T.iris =
-		window.Creative &&
-		Creative.usesCanvasIris &&
-		new CanvasIris({
-			target: T,
-			irisColor: Creative.irisColor
-		})
-
-	T.postMarkupStyling = function rightCorner() {
-		let T = View.endFrame
-
-		// title treatment:
-		// no TT url provided
-		// so using default TT for given layout
-		if (!adData.hasTT) {
-			// removing empty netflix-img element before using default TT
-			T.removeChild(T.tt)
-			T.tt = new UIImage({
-				target: T,
-				source: adData.ttSrc,
-				css: {
-					width: adParams.adWidth
-				}
-			})
-		}
-
-		Align.set(T.tt, Align.CENTER)
-
-		Align.set(T.pedigree, {
-			x: {
-				type: Align.CENTER,
-				against: T.tt
-			},
-			y: {
-				type: Align.CENTER,
-				against: 65
-			}
-		})
-
-		// cta
-		var logoCtaY = adData.hasFTM || adData.hasTuneIn ? 45 : 32
-		T.cta.resize()
-		Align.set(T.cta, {
-			x: {
-				type: Align.RIGHT,
-				offset: -20
-			},
-			y: {
-				type: Align.TOP,
-				offset: logoCtaY
-			}
-		})
-
-		// logo
-		Align.set(T.netflixLogo, {
-			x: {
-				type: Align.LEFT,
-				outer: true,
-				against: T.cta,
-				offset: -14
-			},
-			y: {
-				type: Align.TOP,
-				offset: logoCtaY
-			}
-		})
-
-		function getRectAroundElems(elems) {
-			const rects = elems
-				.map(el => el.getBoundingClientRect())
-				// filter out any non-rendered elems
-				// (determined as elem w/o width and height)
-				.filter(rect => rect.width || rect.height)
-			const left = rects.map(rect => rect.left).reduce((mostLeft, val) => Math.min(mostLeft, val))
-			const top = rects.map(rect => rect.top).reduce((mostTop, val) => Math.min(mostTop, val))
-			const right = rects.map(rect => rect.right).reduce((mostRight, val) => Math.max(mostRight, val))
-			const bottom = rects.map(rect => rect.bottom).reduce((mostBottom, val) => Math.max(mostBottom, val))
-			const center = (left + right) / 2
-			return {
-				x: left,
-				y: top,
-				top,
-				left,
-				bottom,
-				right,
-				width: right - left,
-				height: bottom - top,
-				center
-			}
-		}
-		const ctaLogoRect = getRectAroundElems([T.cta, T.netflixLogo])
-
-		if (adData.hasFTM) {
-			// free trial messaging
-			Styles.setCss(T.ftm, {
-				color: '#fff',
-				fontSize: 14,
-				letterSpacing: 1,
-				textAlign: 'center'
-			})
-			Align.set(T.ftm, {
-				x: { type: Align.CENTER, against: ctaLogoRect.center },
-				y: {
-					type: Align.BOTTOM,
-					against: ctaLogoRect.top,
-					offset: -8
-				}
-			})
-			T.removeChild(T.tuneIn)
-		} else {
-			// tune-in
-			Styles.setCss(T.tuneIn, {
-				color: '#fff',
-				fontSize: 16,
-				letterSpacing: 1,
-				textAlign: 'center'
-			})
-			Align.set(T.tuneIn, {
-				x: { type: Align.CENTER, against: ctaLogoRect.center },
-				y: {
-					type: Align.BOTTOM,
-					against: ctaLogoRect.top,
-					offset: -8
-				}
-			})
-			T.removeChild(T.ftm)
-		}
-
-		// ratings bug
-		if (adData.hasRatings) {
-			Align.set(T.ratingsBug, {
-				x: {
-					type: Align.RIGHT,
-					offset: -5
-				},
-				y: {
-					type: Align.BOTTOM,
-					offset: -5
-				}
-			})
-		} else {
-			T.removeChild(T.ratingsBug)
-		}
+	let endFrameInit
+	switch (arg.layout) {
+		case 'SIDE_BY_SIDE_LEFT':
+		case 'SIDE_BY_SIDE_WIDE':
+		default:
+			endFrameInit = sideBySideInit
+			break
+		case 'STACKED_LEFT':
+		case 'STACKED_CENTER':
+		case 'STACKED_WIDE':
+			endFrameInit = stackedInit
+			break
 	}
+	endFrameInit(T)
+
+	let postMarkup
+	switch (arg.layout) {
+		case 'SIDE_BY_SIDE_LEFT':
+		case 'SIDE_BY_SIDE_WIDE':
+		default:
+			postMarkup = sideBySidePostMarkup
+			break
+		case 'STACKED_LEFT':
+		case 'STACKED_CENTER':
+		case 'STACKED_WIDE':
+			postMarkup = stackedPostMarkup
+			break
+	}
+	T.postMarkupStyling = postMarkup
 
 	return T
 }
