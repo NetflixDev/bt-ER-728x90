@@ -24,7 +24,8 @@ export class Ad {
 
 		View.main = new Main()
 		View.endFrame = new EndFrame({
-			target: View.main
+			target: View.main,
+			layout: window.Creative && Creative.layout
 		})
 
 		View.mainBorder = new MainBorder()
