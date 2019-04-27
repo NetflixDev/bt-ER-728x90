@@ -9,7 +9,7 @@ import { Control } from '@common/js/Control.js'
 import '@netflixadseng/wc-netflix-flushed-ribbon'
 import '@netflixadseng/wc-netflix-video'
 import CanvasIris from '@common/js/CanvasIris.js'
-import { UIComponent, UIBorder, UIButton, UIImage, TextFormat, UITextField, UISvg } from 'ad-ui'
+import { UIComponent, UIBorder, UIButton, UIImage, TextFormat, UITextField, UISvg, UIGroup } from 'ad-ui'
 import { ObjectUtils } from 'ad-utils'
 import { titleTreatmentLayout } from './shared.js'
 
@@ -58,30 +58,11 @@ export default function sideBySidePostMarkup() {
 		}
 	})
 
-	function getRectAroundElems(elems) {
-		const rects = elems
-			.map(el => el.getBoundingClientRect())
-			// filter out any non-rendered elems
-			// (determined as elem w/o width and height)
-			.filter(rect => rect.width || rect.height)
-		const left = rects.map(rect => rect.left).reduce((mostLeft, val) => Math.min(mostLeft, val))
-		const top = rects.map(rect => rect.top).reduce((mostTop, val) => Math.min(mostTop, val))
-		const right = rects.map(rect => rect.right).reduce((mostRight, val) => Math.max(mostRight, val))
-		const bottom = rects.map(rect => rect.bottom).reduce((mostBottom, val) => Math.max(mostBottom, val))
-		const center = (left + right) / 2
-		return {
-			x: left,
-			y: top,
-			top,
-			left,
-			bottom,
-			right,
-			width: right - left,
-			height: bottom - top,
-			center
-		}
-	}
-	const ctaLogoRect = getRectAroundElems([T.cta, T.netflixLogo])
+	// lockup to position CTA and logo together
+	T.ctaLogoLockup = new UIGroup({
+		target: T,
+		children: [T.cta, T.netflixLogo]
+	})
 
 	if (adData.hasFTM) {
 		// free trial messaging
@@ -92,10 +73,11 @@ export default function sideBySidePostMarkup() {
 			textAlign: 'center'
 		})
 		Align.set(T.ftm, {
-			x: { type: Align.CENTER, against: ctaLogoRect.center },
+			x: { type: Align.CENTER, against: T.ctaLogoLockup },
 			y: {
-				type: Align.BOTTOM,
-				against: ctaLogoRect.top,
+				type: Align.TOP,
+				outer: true,
+				against: T.ctaLogoLockup,
 				offset: -8
 			}
 		})
@@ -109,10 +91,11 @@ export default function sideBySidePostMarkup() {
 			textAlign: 'center'
 		})
 		Align.set(T.tuneIn, {
-			x: { type: Align.CENTER, against: ctaLogoRect.center },
+			x: { type: Align.CENTER, against: T.ctaLogoLockup },
 			y: {
-				type: Align.BOTTOM,
-				against: ctaLogoRect.top,
+				type: Align.TOP,
+				outer: true,
+				against: T.ctaLogoLockup,
 				offset: -8
 			}
 		})
