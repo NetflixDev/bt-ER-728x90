@@ -11,3 +11,4 @@ log.txt
 
 # BSA Misc Files
 src/.gitignore
+dist/.gitignore

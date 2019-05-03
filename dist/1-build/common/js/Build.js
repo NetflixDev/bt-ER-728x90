@@ -4,15 +4,14 @@ import '@netflixadseng/wc-netflix-text'
 import '@netflixadseng/wc-netflix-img'
 import { Styles, Markup, Align, Effects } from 'ad-view'
 import { ImageManager } from 'ad-control'
+import { stackedInit, sideBySideInit } from './EndFrame/inits'
 import { Animation } from '@common/js/Animation.js'
 import { Control } from '@common/js/Control.js'
 import '@netflixadseng/wc-netflix-flushed-ribbon'
 import '@netflixadseng/wc-netflix-video'
-import CanvasIris from '@common/js/CanvasIris.js'
+import { stackedPostMarkup, sideBySidePostMarkup } from './EndFrame/postmarkups'
 import { UIComponent, UIBorder, UIButton, UIImage, TextFormat, UITextField, UISvg } from 'ad-ui'
 import { ObjectUtils } from 'ad-utils'
-import { sideBySideInit, stackedInit } from './EndFrame/inits'
-import { sideBySidePostMarkup, stackedPostMarkup } from './EndFrame/postmarkups'
 
 export function Main() {
 	var T = Markup.get('main')
