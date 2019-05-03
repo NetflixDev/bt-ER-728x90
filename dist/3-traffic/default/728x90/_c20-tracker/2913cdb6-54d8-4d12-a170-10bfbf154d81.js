@@ -12,7 +12,7 @@ module.exports = {
     "label": "728x90 NF Global Template",
     "tier": "endframe-resolve",
     "size": "728x90",
-    "creative": "./3-traffic/default/728x90",
+    "creative": "./dist/3-traffic/default/728x90",
     "toolkit": "./toolkit/728x90_NF_Global_Template_ContainerRecycle_Layered.psd",
     "layouts": {
       "SIDE_BY_SIDE_LEFT": "Side-By-Side Left",
