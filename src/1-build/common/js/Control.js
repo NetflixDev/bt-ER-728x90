@@ -52,31 +52,36 @@ export class Control {
 				// check for title treatment url/path in Monet data
 				// if not provided, use default title treatment img for given layout
 				adData.hasTT = !!MonetUtils.getDataByKey('Title_Treatment')
-				if (!adData.hasTT) {
-					const layout = window.Creative && Creative.layout
-					let ttUrl
-					switch (layout) {
-						case 'SIDE_BY_SIDE_LEFT':
-						default:
-							ttUrl = 'title-treatments/tt-side-by-side-left.png'
-							break
-						case 'SIDE_BY_SIDE_WIDE':
-							ttUrl = 'title-treatments/tt-side-by-side-wide.png'
-							break
-						case 'STACKED_LEFT':
-							ttUrl = 'title-treatments/tt-stacked-left.png'
-							break
-						case 'STACKED_CENTER':
-							ttUrl = 'title-treatments/tt-stacked-center.png'
-							break
-						case 'STACKED_WIDE':
-							ttUrl = 'title-treatments/tt-stacked-wide.png'
-							break
-					}
 
-					// load TT
-					adData.ttSrc = ImageManager.addToLoad(ttUrl)
+				const layout = window.Creative && Creative.layout
+				let ttUrl, ttCenter
+				switch (layout) {
+					case 'SIDE_BY_SIDE_LEFT':
+					default:
+						ttUrl = 'title-treatments/tt-side-by-side-left.png'
+						ttCenter = { x: 139, y: 45 }
+						break
+					case 'SIDE_BY_SIDE_WIDE':
+						ttUrl = 'title-treatments/tt-side-by-side-wide.png'
+						ttCenter = { x: 236, y: 45 }
+						break
+					case 'STACKED_LEFT':
+						ttUrl = 'title-treatments/tt-stacked-left.png'
+						ttCenter = { x: 139, y: 45 }
+						break
+					case 'STACKED_CENTER':
+						ttUrl = 'title-treatments/tt-stacked-center.png'
+						ttCenter = { x: 364, y: 45 }
+						break
+					case 'STACKED_WIDE':
+						ttUrl = 'title-treatments/tt-stacked-wide.png'
+						ttCenter = { x: 307, y: 45 }
+						break
 				}
+
+				// load TT
+				adData.ttSrc = ImageManager.addToLoad(ttUrl)
+				adData.ttCenter = ttCenter
 
 				// proceed with ad AFTER the setData() Promise has been fulfilled
 				ImageManager.load(function() {
