@@ -1,0 +1,16 @@
+{
+  "name": "src",
+  "build_size": "728x90",
+  "build_source": {
+    "build_source_path": "./c20-builder-728x90/"
+  },
+  "build_source_options": {
+    "stub_paths": []
+  },
+  "output": "/Users/greg.connell/Documents/_NETFLIX/bt-ER-728x90",
+  "filters": {},
+  "id": "Container 2.0 - 728x90",
+  "bsid": "b04a9ca1-dc39-496f-a04c-4ff39ce68ee3",
+  "processing": false,
+  "error": false
+}
