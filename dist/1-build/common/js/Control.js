@@ -56,26 +56,14 @@ export class Control {
 				const layout = window.Creative && Creative.layout
 				let ttUrl, ttCenter
 				switch (layout) {
-					case 'SIDE_BY_SIDE_LEFT':
+					case 'SIDE_BY_SIDE':
 					default:
 						ttUrl = 'title-treatments/tt-side-by-side-left.png'
 						ttCenter = { x: 139, y: 45 }
 						break
-					case 'SIDE_BY_SIDE_WIDE':
-						ttUrl = 'title-treatments/tt-side-by-side-wide.png'
-						ttCenter = { x: 236, y: 45 }
-						break
-					case 'STACKED_LEFT':
+					case 'STACKED':
 						ttUrl = 'title-treatments/tt-stacked-left.png'
 						ttCenter = { x: 139, y: 45 }
-						break
-					case 'STACKED_CENTER':
-						ttUrl = 'title-treatments/tt-stacked-center.png'
-						ttCenter = { x: 364, y: 45 }
-						break
-					case 'STACKED_WIDE':
-						ttUrl = 'title-treatments/tt-stacked-wide.png'
-						ttCenter = { x: 307, y: 45 }
 						break
 				}
 

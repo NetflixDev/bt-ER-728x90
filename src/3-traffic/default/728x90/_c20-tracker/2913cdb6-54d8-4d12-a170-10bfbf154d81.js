@@ -15,16 +15,13 @@ module.exports = {
     "creative": "./dist/3-traffic/default/728x90",
     "toolkit": "./toolkit/728x90_NF_Global_Template_ContainerRecycle_Layered.psd",
     "layouts": {
-      "SIDE_BY_SIDE_LEFT": "Side-By-Side Left",
-      "SIDE_BY_SIDE_WIDE": "Side-By-Side Wide",
-      "STACKED_LEFT": "Stacked Left",
-      "STACKED_CENTER": "Stacked Center",
-      "STACKED_WIDE": "Stacked Wide"
+      "SIDE_BY_SIDE": "Side-By-Side",
+      "STACKED": "Stacked"
     }
   },
   "context": "RED Interactive",
   "state": "published",
-  "updated": 1557536034197,
+  "updated": 1557791128371,
   "username": "GitHub",
   "full_name": "NetflixDev/bt-ER-728x90",
   "html_url": "https://github.com/NetflixDev/bt-ER-728x90",

@@ -8,7 +8,6 @@ import { stackedInit, sideBySideInit } from './EndFrame/inits'
 import { Animation } from '@common/js/Animation.js'
 import { Control } from '@common/js/Control.js'
 import '@netflixadseng/wc-netflix-flushed-ribbon'
-import '@netflixadseng/wc-netflix-video'
 import { stackedPostMarkup, sideBySidePostMarkup } from './EndFrame/postmarkups'
 import { UIComponent, UIBorder, UIButton, UIImage, TextFormat, UITextField, UISvg } from 'ad-ui'
 import { ObjectUtils } from 'ad-utils'
@@ -57,14 +56,11 @@ export function EndFrame(arg) {
 
 	let endFrameInit
 	switch (arg.layout) {
-		case 'SIDE_BY_SIDE_LEFT':
-		case 'SIDE_BY_SIDE_WIDE':
+		case 'SIDE_BY_SIDE':
 		default:
 			endFrameInit = sideBySideInit
 			break
-		case 'STACKED_LEFT':
-		case 'STACKED_CENTER':
-		case 'STACKED_WIDE':
+		case 'STACKED':
 			endFrameInit = stackedInit
 			break
 	}
@@ -72,14 +68,11 @@ export function EndFrame(arg) {
 
 	let postMarkup
 	switch (arg.layout) {
-		case 'SIDE_BY_SIDE_LEFT':
-		case 'SIDE_BY_SIDE_WIDE':
+		case 'SIDE_BY_SIDE':
 		default:
 			postMarkup = sideBySidePostMarkup
 			break
-		case 'STACKED_LEFT':
-		case 'STACKED_CENTER':
-		case 'STACKED_WIDE':
+		case 'STACKED':
 			postMarkup = stackedPostMarkup
 			break
 	}
