@@ -2,7 +2,7 @@
   "name": "src",
   "build_size": "728x90",
   "build_source": {
-    "build_source_path": "./c20-builder-728x90/"
+    "build_source_path": "./c20-builder/c20-builder-728x90/"
   },
   "build_source_options": {
     "stub_paths": []
@@ -10,7 +10,7 @@
   "output": "/Users/derek.miranda/Internal/c20/build-templates/bt-ER-728x90",
   "filters": {},
   "id": "Container 2.0 - 728x90",
-  "bsid": "c4b64f48-9b29-4af0-9352-f97aacb0a75d",
+  "bsid": "81209365-2996-416b-b888-5fcdc6184b43",
   "processing": false,
   "error": false
 }
