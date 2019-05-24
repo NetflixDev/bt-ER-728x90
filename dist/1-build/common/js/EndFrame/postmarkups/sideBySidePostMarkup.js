@@ -58,7 +58,7 @@ export default function sideBySidePostMarkup() {
 	})
 
 	// lockup to position CTA and logo together
-	T.ctaLogoLockup = new UIGroup({
+	T.brandingLockup = new UIGroup({
 		target: T,
 		children: [T.cta, T.netflixLogo]
 	})
@@ -72,11 +72,11 @@ export default function sideBySidePostMarkup() {
 			textAlign: 'center'
 		})
 		Align.set(T.ftm, {
-			x: { type: Align.CENTER, against: T.ctaLogoLockup },
+			x: { type: Align.CENTER, against: T.brandingLockup },
 			y: {
 				type: Align.TOP,
 				outer: true,
-				against: T.ctaLogoLockup,
+				against: T.brandingLockup,
 				offset: -8
 			}
 		})
@@ -90,11 +90,11 @@ export default function sideBySidePostMarkup() {
 			textAlign: 'center'
 		})
 		Align.set(T.tuneIn, {
-			x: { type: Align.CENTER, against: T.ctaLogoLockup },
+			x: { type: Align.CENTER, against: T.brandingLockup },
 			y: {
 				type: Align.TOP,
 				outer: true,
-				against: T.ctaLogoLockup,
+				against: T.brandingLockup,
 				offset: -8
 			}
 		})
