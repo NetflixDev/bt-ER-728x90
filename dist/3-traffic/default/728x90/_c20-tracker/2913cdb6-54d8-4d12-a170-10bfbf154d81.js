@@ -9,7 +9,6 @@ module.exports = {
   "description": "C20/Monet-compatible templates that use  https://github.com/ff0000-ad-tech/ad-docs/blob/master/README.md",
   "type": "build_templates",
   "builder": {
-    "label": "728x90 NF Global Template",
     "tier": "endframe-resolve",
     "size": "728x90",
     "creative": "./dist/3-traffic/default/728x90",
