@@ -2,8 +2,7 @@
   "container": {
     "lockup": {
       "state": "required",
-      "toolTip":
-        "Lock-up options determine where the Netflix Logo, CTA, and Tune-in appear."
+      "toolTip": "Lock-up options determine where the Netflix Logo, CTA, and Tune-in appear."
     },
     "animation": {
       "state": "required",
@@ -14,15 +13,13 @@
     "Background": {
       "input": {
         "state": "required",
-        "toolTip":
-          "Background image: <ul><li>Match dimensions of the Container</li> <li>Do <b>not</b> include brand elements (Title, Logo, CTA, Tune-In)</li></ul>"
+        "toolTip": "Background image: <ul><li>Match dimensions of the Container</li> <li>Do <b>not</b> include brand elements (Title, Logo, CTA, Tune-In)</li></ul>"
       }
     },
     "Title_Treatment": {
       "input": {
         "state": "required",
-        "toolTip":
-          "Title Treatment image:<ul><li>Match dimensions of the Container</li><li>Use a transparent PNG</li></ul>"
+        "toolTip": "Title Treatment image:<ul><li>Match dimensions of the Container</li><li>Use a transparent PNG</li></ul>"
       }
     },
     "CTA": {
@@ -39,11 +36,16 @@
         "toolTip": "Tune-in text."
       }
     },
+    "Toggle_Ribbon": {
+      "input": {
+        "state": "optional",
+        "toolTip": "Enabling Ribbon will play a scaled N ribbon animation before the endframe. If Supercut is also enabled, this animation plays before the video."
+      }
+    },
     "Toggle_Supercut": {
       "input": {
         "state": "optional",
-        "toolTip":
-          "Enabling Supercut will play FPO video until a Monet Video Asset has been added to the Treatment."
+        "toolTip": "Enabling Supercut will play FPO video until a Monet Video Asset has been added to the Treatment."
       }
     },
     "Supercut": {
