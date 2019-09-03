@@ -26,7 +26,7 @@ function stackedInit(T) {
 
 function baseInit(T, { ctaLogoInit = sideBySideCtaLogoInit }) {
   T.background = document.createElement("netflix-img");
-  T.background.setAttribute("data-dynamic-key", "Background");
+  T.background.setAttribute("data-dynamic-key", "Main");
   T.background.setAttribute("width", adParams.adWidth);
   T.appendChild(T.background);
 
@@ -47,25 +47,20 @@ function baseInit(T, { ctaLogoInit = sideBySideCtaLogoInit }) {
 
   // title treatment
   T.tt = document.createElement("netflix-img");
-  T.tt.setAttribute("data-dynamic-key", "Title_Treatment");
+  T.tt.setAttribute("data-dynamic-key", "Title");
   T.appendChild(T.tt);
 
-  // free trial messaging
-  T.ftm = document.createElement("netflix-text");
-  T.ftm.setAttribute("data-dynamic-key", "FTM");
-  T.appendChild(T.ftm);
-
-  // tune-in
-  T.tuneIn = document.createElement("netflix-text");
-  T.tuneIn.setAttribute("data-dynamic-key", "Tune_In");
-  T.appendChild(T.tuneIn);
+  // headline
+  T.headline = document.createElement("netflix-text");
+  T.headline.setAttribute("data-dynamic-key", "Headline");
+  T.appendChild(T.headline);
 
   // init CTA and logo
   ctaLogoInit(T);
 
   // ratings bug
   T.ratingsBug = document.createElement("netflix-img");
-  T.ratingsBug.setAttribute("data-dynamic-key", "Ratings_Bug_20x20");
+  T.ratingsBug.setAttribute("data-dynamic-key", "Ratings_Bug");
   T.ratingsBug.setAttribute("id", "ratings_bug");
   T.ratingsBug.setAttribute("width", 20);
   T.appendChild(T.ratingsBug);
