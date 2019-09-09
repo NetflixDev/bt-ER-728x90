@@ -39,7 +39,7 @@ export default function sideBySidePostMarkup() {
   });
 
   // cta
-  var logoCtaY = adData.headlineText ? 45 : 32;
+  var logoCtaY = adData.hasFTM || adData.hasTuneIn ? 45 : 32;
   T.cta.resize();
   Align.set(T.cta, {
     x: {
@@ -72,22 +72,43 @@ export default function sideBySidePostMarkup() {
     children: [T.cta, T.netflixLogo]
   });
 
-  // headline
-  Styles.setCss(T.headline, {
-    color: "#fff",
-    fontSize: 14,
-    letterSpacing: 1,
-    textAlign: "center"
-  });
-  Align.set(T.headline, {
-    x: { type: Align.CENTER, against: T.brandingLockup },
-    y: {
-      type: Align.TOP,
-      outer: true,
-      against: T.brandingLockup,
-      offset: -8
-    }
-  });
+  if (adData.hasFTM) {
+    // free trial messaging
+    Styles.setCss(T.ftm, {
+      color: "#fff",
+      fontSize: 14,
+      letterSpacing: 1,
+      textAlign: "center"
+    });
+    Align.set(T.ftm, {
+      x: { type: Align.CENTER, against: T.brandingLockup },
+      y: {
+        type: Align.TOP,
+        outer: true,
+        against: T.brandingLockup,
+        offset: -8
+      }
+    });
+    T.removeChild(T.tuneIn);
+  } else {
+    // tune-in
+    Styles.setCss(T.tuneIn, {
+      color: "#fff",
+      fontSize: 16,
+      letterSpacing: 1,
+      textAlign: "center"
+    });
+    Align.set(T.tuneIn, {
+      x: { type: Align.CENTER, against: T.brandingLockup },
+      y: {
+        type: Align.TOP,
+        outer: true,
+        against: T.brandingLockup,
+        offset: -8
+      }
+    });
+    T.removeChild(T.ftm);
+  }
 
   // ratings bug
   if (adData.hasRatings) {
