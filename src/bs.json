@@ -7,10 +7,10 @@
   "build_source_options": {
     "stub_paths": []
   },
-  "output": "/Users/derek.miranda/Internal/c20/build-templates/bt-ER-728x90",
+  "output": "/Users/derek.miranda/Internal/c20/build-templates-prod/bt-ER-728x90",
   "filters": {},
   "id": "Container 2.0 - 728x90",
-  "bsid": "b7797a22-60cb-41d6-8cf0-eb4a79979666",
+  "bsid": "7bde81ca-5ef1-4535-bb1d-d9bcd456276e",
   "processing": false,
   "error": false
 }
