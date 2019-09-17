@@ -7,10 +7,10 @@
   "build_source_options": {
     "stub_paths": []
   },
-  "output": "/Users/Greg/Documents/_NETFLIX/c20-sources/bt-ER-728x90",
+  "output": "/Users/derek.miranda/Internal/c20/build-templates/bt-ER-728x90",
   "filters": {},
   "id": "Container 2.0 - 728x90",
-  "bsid": "204c7110-e589-4517-87cf-cdb089f1495b",
+  "bsid": "1aafa6b3-24a6-4a99-a754-3379ff8f14d0",
   "processing": false,
   "error": false
 }
