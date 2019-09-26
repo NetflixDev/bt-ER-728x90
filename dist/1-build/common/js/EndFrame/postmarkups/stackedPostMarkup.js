@@ -32,9 +32,13 @@ export default function stackedPostMarkup() {
     }
   });
 
-  // cta
+  // cta + logo
   T.cta.resize();
-  Align.set(T.cta, {
+
+  const topEl = adData.isRTL ? T.netflixLogo : T.cta;
+  const bottomEl = adData.isRTL ? T.cta : T.netflixLogo;
+
+  Align.set(topEl, {
     x: {
       type: Align.RIGHT,
       offset: -16
@@ -45,8 +49,7 @@ export default function stackedPostMarkup() {
     }
   });
 
-  // logo
-  Align.set(T.netflixLogo, {
+  Align.set(bottomEl, {
     x: {
       type: Align.RIGHT,
       offset: -16

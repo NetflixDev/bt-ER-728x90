@@ -38,10 +38,14 @@ export default function sideBySidePostMarkup() {
     }
   });
 
-  // cta
-  var logoCtaY = adData.headlineText ? 45 : 32;
+  // cta + logo
+  const logoCtaY = adData.headlineText ? 45 : 32;
   T.cta.resize();
-  Align.set(T.cta, {
+
+  const leftEl = adData.isRTL ? T.cta : T.netflixLogo;
+  const rightEl = adData.isRTL ? T.netflixLogo : T.cta;
+
+  Align.set(rightEl, {
     x: {
       type: Align.RIGHT,
       offset: -20
@@ -52,12 +56,11 @@ export default function sideBySidePostMarkup() {
     }
   });
 
-  // logo
-  Align.set(T.netflixLogo, {
+  Align.set(leftEl, {
     x: {
       type: Align.LEFT,
       outer: true,
-      against: T.cta,
+      against: rightEl,
       offset: -14
     },
     y: {
@@ -75,7 +78,7 @@ export default function sideBySidePostMarkup() {
   // headline
   Styles.setCss(T.headline, {
     color: "#fff",
-    fontSize: 14,
+    fontSize: 15,
     letterSpacing: 1,
     textAlign: "center"
   });
@@ -85,7 +88,7 @@ export default function sideBySidePostMarkup() {
       type: Align.TOP,
       outer: true,
       against: T.brandingLockup,
-      offset: -8
+      offset: -13
     }
   });
 
