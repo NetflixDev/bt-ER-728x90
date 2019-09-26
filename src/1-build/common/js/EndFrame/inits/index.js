@@ -104,6 +104,7 @@ function stackedCtaLogoInit(T) {
   T.cta.setAttribute("arrow", "");
   T.cta.setAttribute("border", "");
   T.cta.setAttribute("width", 96);
+  T.cta.setAttribute("max-width", 96);
   T.cta.setAttribute("height", 25);
   T.cta.setAttribute("horizontal-pad", "9%");
   T.cta.setAttribute("stretch-origin", "right");
