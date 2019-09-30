@@ -1,4 +1,4 @@
-import sideBySidePostMarkup from "./sideBySidePostMarkup.js";
-import stackedPostMarkup from "./stackedPostMarkup.js";
+import sideBySidePostMarkup from './sideBySidePostMarkup.js'
+import stackedPostMarkup from './stackedPostMarkup.js'
 
-export { sideBySidePostMarkup, stackedPostMarkup };
+export { sideBySidePostMarkup, stackedPostMarkup }
