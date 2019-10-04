@@ -62,7 +62,7 @@ function baseInit(T, { ctaLogoInit = sideBySideCtaLogoInit }) {
   T.ratingsBug = document.createElement("netflix-img");
   T.ratingsBug.setAttribute("data-dynamic-key", "Ratings_Bug");
   T.ratingsBug.setAttribute("id", "ratings_bug");
-  T.ratingsBug.setAttribute("width", 20);
+  T.ratingsBug.setAttribute("width", 14);
   T.appendChild(T.ratingsBug);
 
   T.iris =
